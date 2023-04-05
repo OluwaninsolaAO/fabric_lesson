@@ -72,8 +72,7 @@ Execute `fabfile.py` using:
 ```
 $ fab -f fabfile.py -H localhost,192.168.8.115 system_info
 ```
-In the command above, `-f` is used to specify a fabfile to be used
-(optional, defaults to `fabfile` or `fabfile.py` in the current working
-directory), and `-H` is used to define a list of hosts delimeted by a
-comma (no space) then followed by the `system_info` the name of the task
-to run.
+In the command above, `-f` specifies a fabfile to be used (optional,
+defaults to `fabfile` or `fabfile.py` in the current working directory),
+and `-H` defines a list of hosts delimeted by a comma (no space)
+then followed by the `system_info` the name of the task to run.
