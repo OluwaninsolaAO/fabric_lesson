@@ -101,3 +101,9 @@ Most of the time you will want to just write out the task in your
 fabfile (anything you use once, you’re likely to use again) but this
 feature provides a handy, fast way to quickly dash off an SSH-borne
 command while leveraging your fabfile’s connection settings.
+
+
+### Command-line options
+
+A quick overview of all possible command line options can be found
+via fab `--help` if you’re looking for details on a specific option.
