@@ -54,13 +54,15 @@ $ fab task1 task2
 
 ### Create a Fabric script
 
-Just like any other python script, Create a new file -- by convention
+Just like any other python script containing a set of procedures,
+functions and lines of code, Create a new file -- by convention
 fabric scripts is usually named `fabfile.py` or just `fabfile`. This
 might not always be the case, the use of `-f` flag can be used to
 specify a path to a fabfile.
 
 
 Fabric script example `fabfile.py`.
+
 ```
 from fabric.api import run
 
@@ -69,6 +71,7 @@ def system_info():  # A task named system_info
 ```
 
 Execute `fabfile.py` using:
+
 ```
 $ fab -f fabfile.py -H localhost,192.168.8.115 system_info
 ```
@@ -76,3 +79,25 @@ In the command above, `-f` specifies a fabfile to be used (optional,
 defaults to `fabfile` or `fabfile.py` in the current working directory),
 and `-H` defines a list of hosts delimeted by a comma (no space)
 then followed by the `system_info` the name of the task to run.
+
+
+Fabric however provides a way to run shell commands for any number
+of remote servers or machines following this manner:
+
+```
+$ fab [options] -- [shell command]
+```
+
+Where everything after the -- is turned into a temporary run call, and
+is not parsed for fab options. If you’ve defined a host list at the
+module level or on the command line, this usage will act like a
+one-line anonymous task.
+
+Example:
+```
+$ fab -H system1,system2,system3 -- uname -a
+```
+Most of the time you will want to just write out the task in your
+fabfile (anything you use once, you’re likely to use again) but this
+feature provides a handy, fast way to quickly dash off an SSH-borne
+command while leveraging your fabfile’s connection settings.
