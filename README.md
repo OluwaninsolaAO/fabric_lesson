@@ -5,6 +5,21 @@ remote shell commands (normally or via sudo) and uploading/downloading
 files, as well as auxiliary functionality such as prompting the running
 user for input, or aborting execution.
 
+Using Fabric, you can write Python scripts that can execute shell
+commands on one or more remote servers with just a few lines of code.
+Fabric makes it easy to automate repetitive tasks and deploy
+applications to multiple servers in parallel.
+
+Fabric provides a number of useful features, including the ability
+to define tasks, execute commands over SSH, upload and download files,
+and interact with remote shells. It also has an extensive API for
+managing SSH connections and handling output from remote commands.
+
+Fabric is a powerful tool for managing remote servers and automating
+deployment workflows. It is widely used in the DevOps community and is a
+valuable tool for anyone who needs to manage remote servers on a
+regular basis.
+
 
 ### Install Fabric
 
@@ -29,4 +44,36 @@ $ pip3 install Fabric3==1.14.post1
 ```
 
 Alternatively, the script `install_fabric.sh` contains the commands
-above -- save a few copy and paste.
+above -- save a few copy and paste. On success, fabric will be
+available on your machine with the name `fab`.
+
+```
+$ fab task1 task2
+```
+
+
+### Create a Fabric script
+
+Just like any other python script, Create a new file -- by convention
+fabric scripts is usually named `fabfile.py` or just `fabfile`. This
+might not always be the case, the use of `-f` flag can be used to
+specify a path to a fabfile.
+
+
+Fabric script example `fabfile.py`.
+```
+from fabric.api import run
+
+def system_info():  # A task named system_info
+	run('uname -a')
+```
+
+Execute `fabfile.py` using:
+```
+$ fab -f fabfile.py -H localhost,192.168.8.115 system_info
+```
+In the command above, `-f` is used to specify a fabfile to be used
+(optional, defaults to `fabfile` or `fabfile.py` in the current working
+directory), and `-H` is used to define a list of hosts delimeted by a
+comma (no space) then followed by the `system_info` the name of the task
+to run.
